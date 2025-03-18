@@ -3,46 +3,67 @@ public class ArvoreBinariaBusca {
     private static final int ESPACO_IMPRESSAO = 4;
     No raiz;
 
+    ArvoreBinariaBusca arvorePorNome = new ArvoreBinariaBusca();
+
     public ArvoreBinariaBusca() {
         this.raiz = null;
     }
 
-    public void inserir(int valorNovo) {
+    public void inserir(Contato novoContato) {
         if (estaVazia()) {
-            raiz = new No(valorNovo);
+            raiz = new No(novoContato);
             return;
         }
 
         No atual = raiz;
         No pai = null;
 
-        // Percorre a árvore até encontrar a posição de inserção
+        No atualPorNome = arvorePorNome.raiz;
+        No paiPorNome = null;
+
         while (atual != null) {
             pai = atual;
-            if (valorNovo < atual.valor) {
+            if (novoContato.getId() < atual.contato.getId()) {
                 atual = atual.esquerdo;
-            } else if (valorNovo > atual.valor) {
+            } else if (novoContato.getId() > atual.contato.getId()) {
                 atual = atual.direito;
             } else {
                 return; // Valor já existe, ignora
             }
         }
 
+        
+        while (atualPorNome != null) {
+            paiPorNome = atualPorNome;
+            if (novoContato.getNome().compareTo(atual.contato.getNome()) < 0) {
+                atualPorNome = atual.esquerdo;
+            } else if (novoContato.getNome().compareTo(atual.contato.getNome()) > 0) {
+                atualPorNome = atual.direito;
+            }
+        }
+
         // Após encontrar a posição (atual == null), insere o novo nó
-        No novoNo = new No(valorNovo);
-        if (valorNovo < pai.valor) {
+        No novoNo = new No(novoContato);
+        if (novoContato.getId() < pai.contato.getId()) {
             pai.esquerdo = novoNo;
         } else {
             pai.direito = novoNo;
         }
+
+        No novoNoPorNome = new No(novoContato);
+        if (novoContato.getNome().compareTo(paiPorNome.contato.getNome()) < 0) {
+            paiPorNome.esquerdo = novoNoPorNome;
+        } else {
+            paiPorNome.direito = novoNoPorNome;
+        }
     }
 
-    public No buscar(int valorBuscado) {
+    public No buscar(int idContato) {
         No atual = raiz;
         while (atual != null) {
-            if (valorBuscado == atual.valor)
+            if (idContato == atual.contato.getId())
                 return atual;
-            else if (valorBuscado < atual.valor)
+            else if (idContato < atual.contato.getId())
                 atual = atual.esquerdo;
             else
                 atual = atual.direito;
@@ -64,9 +85,9 @@ public class ArvoreBinariaBusca {
         No pai = null;
 
         // Encontrar o nó a ser removido e seu pai
-        while (atual != null && atual.valor != valorRemover) {
+        while (atual != null && atual.contato.getId() != valorRemover) {
             pai = atual;
-            if (valorRemover < atual.valor) {
+            if (valorRemover < atual.contato.getId()) {
                 atual = atual.esquerdo;
             } else {
                 atual = atual.direito;
@@ -110,7 +131,7 @@ public class ArvoreBinariaBusca {
             }
 
             // Copiar o valor do sucessor para o nó atual
-            atual.valor = sucessor.valor;
+            atual.contato = sucessor.contato;
 
             // Remover o sucessor (que tem no máximo um filho direito)
             if (paiSucessor == atual) {
@@ -149,8 +170,8 @@ public class ArvoreBinariaBusca {
         return 1 + Math.max(alturaEsquerda, alturaDireita);
     }
 
-    public int calcularAlturaNo(int valor) {
-        No no = buscar(valor);
+    public int calcularAlturaNo(int idContato) {
+        No no = buscar(idContato);
         if (no == null) {
             return -1;
         }
@@ -161,21 +182,21 @@ public class ArvoreBinariaBusca {
         return calcularAlturaArvore();
     }
 
-    public int calcularProfundidadeNo(int valor) {
-        return calcularProfundidadeRecursivo(raiz, valor, 0);
+    public int calcularProfundidadeNo(int idContato) {
+        return calcularProfundidadeRecursivo(raiz, idContato, 0);
     }
 
-    private int calcularProfundidadeRecursivo(No atual, int valor, int profundidade) {
+    private int calcularProfundidadeRecursivo(No atual, int idContato, int profundidade) {
         if (atual == null) {
             return -1;
         }
-        if (atual.valor == valor) {
+        if (atual.contato.getId() == idContato) {
             return profundidade;
         }
-        if (valor < atual.valor) {
-            return calcularProfundidadeRecursivo(atual.esquerdo, valor, profundidade + 1);
+        if (idContato < atual.contato.getId()) {
+            return calcularProfundidadeRecursivo(atual.esquerdo, idContato, profundidade + 1);
         }
-        return calcularProfundidadeRecursivo(atual.direito, valor, profundidade + 1);
+        return calcularProfundidadeRecursivo(atual.direito, idContato, profundidade + 1);
     }
 
     public String imprimirPreOrdem() {
@@ -193,7 +214,9 @@ public class ArvoreBinariaBusca {
 
     private void imprimirPreOrdemRecursivo(No atual, StringBuilder sb) {
         if (atual != null) {
-            sb.append(atual.valor).append(", ");
+            sb.append("ID: "+ atual.contato.getId()).append(", \n");
+            sb.append("Nome: "+ atual.contato.getNome()).append(", \n");
+            sb.append("Telefone: "+ atual.contato.getTelefone()).append(", \n");            
             imprimirPreOrdemRecursivo(atual.esquerdo, sb);
             imprimirPreOrdemRecursivo(atual.direito, sb);
         }
@@ -216,7 +239,9 @@ public class ArvoreBinariaBusca {
         if (atual != null) {
             imprimirPosOrdemRecursivo(atual.esquerdo, sb);
             imprimirPosOrdemRecursivo(atual.direito, sb);
-            sb.append(atual.valor).append(", ");
+            sb.append("ID: "+ atual.contato.getId()).append(", \n");
+            sb.append("Nome: "+ atual.contato.getNome()).append(", \n");
+            sb.append("Telefone: "+ atual.contato.getTelefone()).append(", \n");
         }
     }
 
@@ -236,7 +261,9 @@ public class ArvoreBinariaBusca {
     private void imprimirInOrdemRecursivo(No atual, StringBuilder sb) {
         if (atual != null) {
             imprimirInOrdemRecursivo(atual.esquerdo, sb);
-            sb.append(atual.valor).append(", ");
+            sb.append("ID: "+ atual.contato.getId()).append(", \n");
+            sb.append("Nome: "+ atual.contato.getNome()).append(", \n");
+            sb.append("Telefone: "+ atual.contato.getTelefone()).append(", \n");            
             imprimirInOrdemRecursivo(atual.direito, sb);
         }
     }
@@ -260,10 +287,9 @@ public class ArvoreBinariaBusca {
         for (int i = 4; i < espaco; i++) {
             System.out.print(" ");
         }
-        System.out.print(atual.valor + "\n");
+        System.out.print(atual.contato + "\n");
 
         imprimirArvoreTextoRecursivo(atual.esquerdo, espaco);
 
     }
-
 }

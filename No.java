@@ -1,10 +1,10 @@
 public class No {
-    int valor;
+    Contato contato;
     No esquerdo;
     No direito;
 
-    public No(int valor) {
-        this.valor = valor;
+    public No(Contato contato) {
+        this.contato = contato;
         this.esquerdo = null;
         this.direito = null;
     }

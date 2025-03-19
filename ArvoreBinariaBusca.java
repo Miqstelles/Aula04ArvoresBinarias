@@ -2,27 +2,26 @@ public class ArvoreBinariaBusca {
 
     private static final int ESPACO_IMPRESSAO = 4;
     No raiz;
-    No raizArvorePorNome;
-    // ArvoreBinariaBusca arvorePorNome = new ArvoreBinariaBusca();
 
     public ArvoreBinariaBusca() {
         this.raiz = null;
-        this.raizArvorePorNome = null;
     }
 
     public void inserir(Contato novoContato) {
-        if (estaVazia()) {
-            raiz = new No(novoContato);
-            raizArvorePorNome = new No(novoContato);
+        long inicio = System.nanoTime();
+        if(buscar(novoContato.getId()) != null) {
+            System.out.println("Contato com id " + novoContato.getId() + "já esta cadastrado!");
             return;
         }
 
+        if (estaVazia()) {
+            raiz = new No(novoContato);
+            return;
+        }
+    
         No atual = raiz;
         No pai = null;
-
-        No atualPorNome = raizArvorePorNome;
-        No paiPorNome = null;
-
+    
         while (atual != null) {
             pai = atual;
             if (novoContato.getId() < atual.contato.getId()) {
@@ -30,35 +29,49 @@ public class ArvoreBinariaBusca {
             } else if (novoContato.getId() > atual.contato.getId()) {
                 atual = atual.direito;
             } else {
-                return; // Valor já existe, ignora
+                return;
             }
         }
-
-        
-        while (atualPorNome != null) {
-            paiPorNome = atualPorNome;
-            if (novoContato.getNome().compareTo(atualPorNome.contato.getNome()) < 0) {
-                atualPorNome = atualPorNome.esquerdo;
-            } else if (novoContato.getNome().compareTo(atualPorNome.contato.getNome()) > 0) {
-                atualPorNome = atualPorNome.direito;
-            }
-        }
-
-        // Após encontrar a posição (atual == null), insere o novo nó
+    
         No novoNo = new No(novoContato);
         if (novoContato.getId() < pai.contato.getId()) {
             pai.esquerdo = novoNo;
         } else {
             pai.direito = novoNo;
         }
+        long fim = System.nanoTime();
+        double duracao = (fim - inicio) / 1_000_000.0; 
+        System.out.printf("Método inserir levou %.6f ms%n", duracao);
+    }
 
-        No novoNoPorNome = new No(novoContato);
-        if (novoContato.getNome().compareTo(paiPorNome.contato.getNome()) < 0) {
-            paiPorNome.esquerdo = novoNoPorNome;
+    public void inserirPorNome(Contato novoContato) {
+        if (estaVazia()) {
+            raiz = new No(novoContato);
+            return;
+        }
+    
+        No atual = raiz;
+        No pai = null;
+    
+        while (atual != null) {
+            pai = atual;
+            if (novoContato.getNome().compareTo(atual.contato.getNome()) < 0) {
+                atual = atual.esquerdo;
+            } else if (novoContato.getNome().compareTo(atual.contato.getNome()) > 0) {
+                atual = atual.direito;
+            } else {
+                return;
+            }
+        }
+    
+        No novoNo = new No(novoContato);
+        if (novoContato.getNome().compareTo(pai.contato.getNome()) < 0) {
+            pai.esquerdo = novoNo;
         } else {
-            paiPorNome.direito = novoNoPorNome;
+            pai.direito = novoNo;
         }
     }
+    
 
     public No buscar(int idContato) {
         No atual = raiz;
@@ -294,4 +307,18 @@ public class ArvoreBinariaBusca {
         imprimirArvoreTextoRecursivo(atual.esquerdo, espaco);
 
     }
+
+    public String imprimirInOrdemPorNome() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        
+        imprimirInOrdemRecursivo(raiz, sb);
+        
+        if (sb.length() > 1) {
+            sb.delete(sb.length() - 2, sb.length()); 
+        }
+        sb.append("]");
+        return sb.toString();
+    }
+    
 }

@@ -2,23 +2,25 @@ public class ArvoreBinariaBusca {
 
     private static final int ESPACO_IMPRESSAO = 4;
     No raiz;
-
-    ArvoreBinariaBusca arvorePorNome = new ArvoreBinariaBusca();
+    No raizArvorePorNome;
+    // ArvoreBinariaBusca arvorePorNome = new ArvoreBinariaBusca();
 
     public ArvoreBinariaBusca() {
         this.raiz = null;
+        this.raizArvorePorNome = null;
     }
 
     public void inserir(Contato novoContato) {
         if (estaVazia()) {
             raiz = new No(novoContato);
+            raizArvorePorNome = new No(novoContato);
             return;
         }
 
         No atual = raiz;
         No pai = null;
 
-        No atualPorNome = arvorePorNome.raiz;
+        No atualPorNome = raizArvorePorNome;
         No paiPorNome = null;
 
         while (atual != null) {
@@ -35,10 +37,10 @@ public class ArvoreBinariaBusca {
         
         while (atualPorNome != null) {
             paiPorNome = atualPorNome;
-            if (novoContato.getNome().compareTo(atual.contato.getNome()) < 0) {
-                atualPorNome = atual.esquerdo;
-            } else if (novoContato.getNome().compareTo(atual.contato.getNome()) > 0) {
-                atualPorNome = atual.direito;
+            if (novoContato.getNome().compareTo(atualPorNome.contato.getNome()) < 0) {
+                atualPorNome = atualPorNome.esquerdo;
+            } else if (novoContato.getNome().compareTo(atualPorNome.contato.getNome()) > 0) {
+                atualPorNome = atualPorNome.direito;
             }
         }
 

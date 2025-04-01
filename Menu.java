@@ -84,11 +84,7 @@ public class Menu {
             case 5:
                 String caminhoArquivo = "c:/Users/Windows 10 Pro/Desktop/ED2-TR-2/Aula04ArvoresBinarias/assets/contatos.csv";  // Caminho do arquivo CSV
                 int quantidadeContatos = 50000;  // Quantidade de contatos a serem gerados
-
-                // Gerar o arquivo CSV
                 GeradorCSV.gerarArquivoCSV(caminhoArquivo, quantidadeContatos);
-
-                // Importar o arquivo CSV
                 ImportadorCSV.importarCSV(caminhoArquivo, this.arvore, this.arvoreOrdenadaPorNome);
                 break;
             case 6:

@@ -82,7 +82,7 @@ public class Menu {
                 // Listar contatos em ordem alfabética
                 break;
             case 5:
-                String caminhoArquivo = "c:/Users/Windows 10 Pro/Desktop/ED2-TR-2/Aula04ArvoresBinarias/assets/contatos.csv";  // Caminho do arquivo CSV
+                String caminhoArquivo = System.getProperty("user.dir") + "/assets/contatos.csv"; // Caminho do arquivo CSV
                 int quantidadeContatos = 50000;  // Quantidade de contatos a serem gerados
                 GeradorCSV.gerarArquivoCSV(caminhoArquivo, quantidadeContatos);
                 ImportadorCSV.importarCSV(caminhoArquivo, this.arvore, this.arvoreOrdenadaPorNome);

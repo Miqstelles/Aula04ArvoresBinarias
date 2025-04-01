@@ -9,7 +9,8 @@ public class GeradorCSV {
     public static void gerarArquivoCSV(String caminhoArquivo, int quantidadeContatos) {
         try {
             // Criar a pasta 'assets' dentro de 'Aula04ArvoresBinarias' se não existir
-            File pasta = new File("c:/Users/Windows 10 Pro/Desktop/ED2-TR-2/Aula04ArvoresBinarias/assets");
+            File pasta = new File( System.getProperty("user.dir") + "/assets/contatos.csv");
+
             if (!pasta.exists()) {
                 pasta.mkdir();
             }
@@ -35,7 +36,7 @@ public class GeradorCSV {
     }
 
     public static void main(String[] args) {
-        String arquivoCSV = "c:/Users/Windows 10 Pro/Desktop/ED2-TR-2/Aula04ArvoresBinarias/assets/contatos.csv";  // Caminho do arquivo CSV
+        String arquivoCSV = System.getProperty("user.dir") + "/assets/contatos.csv"; // Caminho do arquivo CSV
         int quantidadeContatos = 50000;  // Total de contatos a serem gerados
 
         gerarArquivoCSV(arquivoCSV, quantidadeContatos);

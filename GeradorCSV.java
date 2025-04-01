@@ -9,12 +9,14 @@ public class GeradorCSV {
     public static void gerarArquivoCSV(String caminhoArquivo, int quantidadeContatos) {
         try {
             // Criar a pasta 'assets' dentro de 'Aula04ArvoresBinarias' se não existir
-            File pasta = new File( System.getProperty("user.dir") + "/assets/contatos.csv");
+            File pasta = new File(System.getProperty("user.dir") + "/assets");
 
+            // Verificar se a pasta existe. Caso contrário, criar
             if (!pasta.exists()) {
-                pasta.mkdir();
+                pasta.mkdir(); // Criar a pasta
             }
 
+            // Criar o arquivo CSV dentro da pasta 'assets'
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(caminhoArquivo))) {
                 writer.write("Codigo,Nome,Telefone\n");  // Cabeçalho do CSV
 

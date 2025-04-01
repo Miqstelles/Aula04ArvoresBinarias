@@ -45,6 +45,7 @@ public class ArvoreBinariaBusca {
     }
 
     public void inserirPorNome(Contato novoContato) {
+        long inicio = System.nanoTime();
         if (estaVazia()) {
             raiz = new No(novoContato);
             return;
@@ -70,10 +71,14 @@ public class ArvoreBinariaBusca {
         } else {
             pai.direito = novoNo;
         }
+        long fim = System.nanoTime();
+        double duracao = (fim - inicio) / 1_000_000.0; 
+        System.out.printf("Método inserir Por nome levou %.6f ms%n", duracao);
     }
     
 
     public No buscar(int idContato) {
+        long inicio = System.nanoTime();
         No atual = raiz;
         while (atual != null) {
             if (idContato == atual.contato.getId())
@@ -83,6 +88,9 @@ public class ArvoreBinariaBusca {
             else
                 atual = atual.direito;
         }
+        long fim = System.nanoTime();
+        double duracao = (fim - inicio) / 1_000_000.0; 
+        System.out.printf("Método buscar levou %.6f ms%n", duracao);
         return null;
     }
 
@@ -91,7 +99,7 @@ public class ArvoreBinariaBusca {
     }
 
     public void remover(int valorRemover) {
-
+        long inicio = System.nanoTime();
         if (estaVazia()) {
             return;
         }
@@ -155,6 +163,9 @@ public class ArvoreBinariaBusca {
                 paiSucessor.esquerdo = sucessor.direito;
             }
         }
+        long fim = System.nanoTime();
+        double duracao = (fim - inicio) / 1_000_000.0; 
+        System.out.printf("Método remover levou %.6f ms%n", duracao);
     }
 
     public boolean estaVazia() {
@@ -238,6 +249,7 @@ public class ArvoreBinariaBusca {
     }
 
     public String imprimirPosOrdem() {
+        long inicio = System.nanoTime();
         StringBuilder sb = new StringBuilder();
         sb.append("[");
         
@@ -247,10 +259,14 @@ public class ArvoreBinariaBusca {
             sb.delete(sb.length() - 2, sb.length());
         }
         sb.append("]");
+        long fim = System.nanoTime();
+        double duracao = (fim - inicio) / 1_000_000.0; 
+        System.out.printf("Método imprimir posOrdem levou %.6f ms%n", duracao);
         return sb.toString();
     }
 
     private void imprimirPosOrdemRecursivo(No atual, StringBuilder sb) {
+        long inicio = System.nanoTime();
         if (atual != null) {
             imprimirPosOrdemRecursivo(atual.esquerdo, sb);
             imprimirPosOrdemRecursivo(atual.direito, sb);
@@ -258,9 +274,13 @@ public class ArvoreBinariaBusca {
             sb.append("Nome: "+ atual.contato.getNome()).append(", \n");
             sb.append("Telefone: "+ atual.contato.getTelefone()).append(", \n");
         }
+        long fim = System.nanoTime();
+        double duracao = (fim - inicio) / 1_000_000.0; 
+        System.out.printf("Método buscar levou %.6f ms%n", duracao);
     }
 
     public String imprimirInOrdem() {
+        
         StringBuilder sb = new StringBuilder();
         sb.append("[");
         

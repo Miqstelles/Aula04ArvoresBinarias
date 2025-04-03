@@ -240,9 +240,9 @@ public class ArvoreBinariaBusca {
 
     private void imprimirPreOrdemRecursivo(No atual, StringBuilder sb) {
         if (atual != null) {
-            sb.append("ID: "+ atual.contato.getId()).append(", \n");
-            sb.append("Nome: "+ atual.contato.getNome()).append(", \n");
-            sb.append("Telefone: "+ atual.contato.getTelefone()).append(", \n");            
+            sb.append("ID: "+ atual.contato.getId()).append(", ");
+            sb.append("Nome: "+ atual.contato.getNome()).append(", ");
+            sb.append("Telefone: "+ atual.contato.getTelefone()).append(", ");            
             imprimirPreOrdemRecursivo(atual.esquerdo, sb);
             imprimirPreOrdemRecursivo(atual.direito, sb);
         }

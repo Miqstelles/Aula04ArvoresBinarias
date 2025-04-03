@@ -17,46 +17,47 @@ public class ArvoreBinariaBuscaTeste {
 
     @Test
     public void testarImprimirArvoreTexto() {
-        arvore.inserir(15);
-        arvore.inserir(16);
-        arvore.inserir(20);
-        arvore.inserir(23);
-        arvore.inserir(18);
-        arvore.inserir(5);
-        arvore.inserir(3);
-        arvore.inserir(12);
-        arvore.inserir(13);
-        arvore.inserir(10);
-        arvore.inserir(6);
-        arvore.inserir(7);
+        
+        arvore.inserir(new Contato(15, "Contato 15", "(11) 9 9999-9999"));
+        arvore.inserir(new Contato(16, "Contato 16", "(11) 9 9999-9998"));
+        arvore.inserir(new Contato(20, "Contato 20", "(11) 9 9999-9997"));
+        arvore.inserir(new Contato(23, "Contato 23", "(11) 9 9999-9996"));
+        arvore.inserir(new Contato(18, "Contato 18", "(11) 9 9999-9995"));
+        arvore.inserir(new Contato(5, "Contato 5", "(11) 9 9999-9994"));
+        arvore.inserir(new Contato(3, "Contato 3", "(11) 9 9999-9993"));
+        arvore.inserir(new Contato(12, "Contato 12", "(11) 9 9999-9992"));
+        arvore.inserir(new Contato(13, "Contato 13", "(11) 9 9999-9991"));
+        arvore.inserir(new Contato(10, "Contato 10", "(11) 9 9999-9990"));
+        arvore.inserir(new Contato(6, "Contato 6", "(11) 9 9999-9989"));
+        arvore.inserir(new Contato(7, "Contato 7", "(11) 9 9999-9988"));
         arvore.imprimirArvoreTexto();
     }
 
     @Test
     public void testarEstaVaziaAposInsercao() {
-        arvore.inserir(10);
+        arvore.inserir(new Contato(10, "Contato 10", "(11) 9 9999-9999"));
         assertFalse(arvore.estaVazia());
     }
 
     @Test
     public void testarEstaVaziaAposRemocaoUnicoNo() {
-        arvore.inserir(10);
+        arvore.inserir(new Contato(10, "Contato 10", "(11) 9 9999-9999"));
         arvore.remover(10);
         assertTrue(arvore.estaVazia());
     }
 
     @Test
     public void testarInserirEBuscarUnicoNo() {
-        arvore.inserir(5);
+        arvore.inserir(new Contato(5, "Contato 5", "(11) 9 9999-9999"));
         assertTrue(arvore.existe(5));
         assertFalse(arvore.existe(10));
     }
 
     @Test
     public void testarInserirEBuscarMultiplosNos() {
-        arvore.inserir(5);
-        arvore.inserir(3);
-        arvore.inserir(7);
+        arvore.inserir(new Contato(5, "Contato 5", "(11) 9 9999-9999"));
+        arvore.inserir(new Contato(3, "Contato 3", "(11) 9 9999-9998"));
+        arvore.inserir(new Contato(7, "Contato 7", "(11) 9 9999-9997"));
         assertTrue(arvore.existe(5));
         assertTrue(arvore.existe(3));
         assertTrue(arvore.existe(7));
@@ -65,8 +66,8 @@ public class ArvoreBinariaBuscaTeste {
 
     @Test
     public void testarInserirDuplicado() {
-        arvore.inserir(5);
-        arvore.inserir(5); // Não deve alterar a arvore
+        arvore.inserir(new Contato(5, "Contato 5", "(11) 9 9999-9999"));
+        arvore.inserir(new Contato(5, "Contato 5", "(11) 9 9999-9999")); // Não deve alterar a arvore
         assertEquals(1, arvore.contarNos());
         assertTrue(arvore.existe(5));
     }
@@ -78,8 +79,8 @@ public class ArvoreBinariaBuscaTeste {
 
     @Test
     public void testarRemoverNoFolha() {
-        arvore.inserir(5);
-        arvore.inserir(3);
+        arvore.inserir(new Contato(5, "Contato 5", "(11) 9 9999-9999"));
+        arvore.inserir(new Contato(3, "Contato 3", "(11) 9 9999-9998"));
         arvore.remover(3);
         assertTrue(arvore.existe(5));
         assertFalse(arvore.existe(3));
@@ -88,9 +89,9 @@ public class ArvoreBinariaBuscaTeste {
 
     @Test
     public void testarRemoverNoComUmFilho() {
-        arvore.inserir(5);
-        arvore.inserir(3);
-        arvore.inserir(4);
+        arvore.inserir(new Contato(5, "Contato 5", "(11) 9 9999-9999"));
+        arvore.inserir(new Contato(3, "Contato 3", "(11) 9 9999-9998"));
+        arvore.inserir(new Contato(4, "Contato 4", "(11) 9 9999-9997"));
         arvore.remover(3);
         assertTrue(arvore.existe(5));
         assertTrue(arvore.existe(4));
@@ -100,11 +101,11 @@ public class ArvoreBinariaBuscaTeste {
 
     @Test
     public void testarRemoverNoComDoisFilhos() {
-        arvore.inserir(5);
-        arvore.inserir(3);
-        arvore.inserir(7);
-        arvore.inserir(6);
-        arvore.inserir(8);
+        arvore.inserir(new Contato(5, "Contato 5", "(11) 9 9999-9999"));
+        arvore.inserir(new Contato(3, "Contato 3", "(11) 9 9999-9998"));
+        arvore.inserir(new Contato(7, "Contato 7", "(11) 9 9999-9997"));
+        arvore.inserir(new Contato(6, "Contato 6", "(11) 9 9999-9996"));
+        arvore.inserir(new Contato(8, "Contato 8", "(11) 9 9999-9995"));
         arvore.remover(7);
         assertTrue(arvore.existe(5));
         assertTrue(arvore.existe(3));
@@ -116,30 +117,30 @@ public class ArvoreBinariaBuscaTeste {
 
     @Test
     public void testarRemoverNoComDoisFilhosSlide() {
-        arvore.inserir(15);
-        arvore.inserir(16);
-        arvore.inserir(20);
-        arvore.inserir(23);
-        arvore.inserir(18);
-        arvore.inserir(5);
-        arvore.inserir(3);
-        arvore.inserir(12);
-        arvore.inserir(13);
-        arvore.inserir(10);
-        arvore.inserir(6);
-        arvore.inserir(7);
+        arvore.inserir(new Contato(15, "Contato 15", "(11) 9 9999-9999"));
+        arvore.inserir(new Contato(16, "Contato 16", "(11) 9 9999-9998"));
+        arvore.inserir(new Contato(20, "Contato 20", "(11) 9 9999-9997"));
+        arvore.inserir(new Contato(23, "Contato 23", "(11) 9 9999-9996"));
+        arvore.inserir(new Contato(18, "Contato 18", "(11) 9 9999-9995"));
+        arvore.inserir(new Contato(5, "Contato 5", "(11) 9 9999-9994"));
+        arvore.inserir(new Contato(3, "Contato 3", "(11) 9 9999-9993"));
+        arvore.inserir(new Contato(12, "Contato 12", "(11) 9 9999-9992"));
+        arvore.inserir(new Contato(13, "Contato 13", "(11) 9 9999-9991"));
+        arvore.inserir(new Contato(10, "Contato 10", "(11) 9 9999-9990"));
+        arvore.inserir(new Contato(6, "Contato 6", "(11) 9 9999-9989"));
+        arvore.inserir(new Contato(7, "Contato 7", "(11) 9 9999-9988"));
 
         arvore.remover(5);
         assertFalse(arvore.existe(5));
         assertTrue(arvore.existe(6));
         assertTrue(arvore.existe(7));
         assertEquals(11, arvore.contarNos());
-        assertEquals(6, arvore.raiz.esquerdo.valor);
+        assertEquals(6, arvore.raiz.esquerdo.contato.getId());
     }
 
     @Test
     public void testarRemoverRaizUnica() {
-        arvore.inserir(5);
+        arvore.inserir(new Contato(5, "Contato 5", "(11) 9 9999-9999"));
         arvore.remover(5);
         assertFalse(arvore.existe(5));
         assertEquals(0, arvore.contarNos());
@@ -147,7 +148,7 @@ public class ArvoreBinariaBuscaTeste {
 
     @Test
     public void testarRemoverNaoExistente() {
-        arvore.inserir(5);
+        arvore.inserir(new Contato(5, "Contato 5", "(11) 9 9999-9999"));
         arvore.remover(10);
         assertTrue(arvore.existe(5));
         assertEquals(1, arvore.contarNos());
@@ -160,17 +161,17 @@ public class ArvoreBinariaBuscaTeste {
 
     @Test
     public void testarContarNosUmNo() {
-        arvore.inserir(5);
+        arvore.inserir(new Contato(5, "Contato 5", "(11) 9 9999-9999"));
         assertEquals(1, arvore.contarNos());
     }
 
     @Test
     public void testarContarNosArvoreGrande() {
-        arvore.inserir(10);
-        arvore.inserir(5);
-        arvore.inserir(15);
-        arvore.inserir(3);
-        arvore.inserir(7);
+        arvore.inserir(new Contato(5, "Contato 5", "(11) 9 9999-9999"));
+        arvore.inserir(new Contato(3, "Contato 3", "(11) 9 9999-9998"));
+        arvore.inserir(new Contato(7, "Contato 7", "(11) 9 9999-9997"));
+        arvore.inserir(new Contato(6, "Contato 6", "(11) 9 9999-9996"));
+        arvore.inserir(new Contato(8, "Contato 8", "(11) 9 9999-9995"));
         assertEquals(5, arvore.contarNos());
     }
 
@@ -181,24 +182,24 @@ public class ArvoreBinariaBuscaTeste {
 
     @Test
     public void testarCalcularAlturaArvoreUmNo() {
-        arvore.inserir(5);
+        arvore.inserir(new Contato(5, "Contato 5", "(11) 9 9999-9999"));
         assertEquals(0, arvore.calcularAlturaArvore());
     }
 
     @Test
     public void testarCalcularAlturaArvoreBalanceada() {
-        arvore.inserir(5);
-        arvore.inserir(3);
-        arvore.inserir(7);
+        arvore.inserir(new Contato(5, "Contato 5", "(11) 9 9999-9999"));
+        arvore.inserir(new Contato(3, "Contato 3", "(11) 9 9999-9998"));
+        arvore.inserir(new Contato(7, "Contato 7", "(11) 9 9999-9997"));
         assertEquals(1, arvore.calcularAlturaArvore());
     }
 
     @Test
     public void testarCalcularAlturaArvoreDesbalanceada() {
-        arvore.inserir(10);
-        arvore.inserir(5);
-        arvore.inserir(3);
-        arvore.inserir(1);
+        arvore.inserir(new Contato(10, "Contato 10", "(11) 9 9999-9999"));
+        arvore.inserir(new Contato(5, "Contato 5", "(11) 9 9999-9998"));
+        arvore.inserir(new Contato(3, "Contato 3", "(11) 9 9999-9997"));
+        arvore.inserir(new Contato(1, "Contato 1", "(11) 9 9999-9996"));
         assertEquals(3, arvore.calcularAlturaArvore());
     }
 
@@ -209,25 +210,25 @@ public class ArvoreBinariaBuscaTeste {
 
     @Test
     public void testarCalcularAlturaNoRaiz() {
-        arvore.inserir(5);
-        arvore.inserir(3);
-        arvore.inserir(7);
+        arvore.inserir(new Contato(5, "Contato 5", "(11) 9 9999-9999"));
+        arvore.inserir(new Contato(3, "Contato 3", "(11) 9 9999-9998"));
+        arvore.inserir(new Contato(7, "Contato 7", "(11) 9 9999-9997"));
         assertEquals(1, arvore.calcularAlturaNo(5));
     }
 
     @Test
     public void testarCalcularAlturaNoFolha() {
-        arvore.inserir(5);
-        arvore.inserir(3);
+        arvore.inserir(new Contato(5, "Contato 5", "(11) 9 9999-9999"));
+        arvore.inserir(new Contato(3, "Contato 3", "(11) 9 9999-9998"));
         assertEquals(0, arvore.calcularAlturaNo(3));
     }
 
     @Test
     public void testarCalcularAlturaNoIntermediario() {
-        arvore.inserir(10);
-        arvore.inserir(5);
-        arvore.inserir(3);
-        arvore.inserir(7);
+        arvore.inserir(new Contato(10, "Contato 10", "(11) 9 9999-9999"));
+        arvore.inserir(new Contato(5, "Contato 5", "(11) 9 9999-9998"));
+        arvore.inserir(new Contato(3, "Contato 3", "(11) 9 9999-9997"));
+        arvore.inserir(new Contato(7, "Contato 7", "(11) 9 9999-9996"));
         assertEquals(1, arvore.calcularAlturaNo(5));
     }
 
@@ -238,16 +239,16 @@ public class ArvoreBinariaBuscaTeste {
 
     @Test
     public void testarCalcularProfundidadeArvoreUmNo() {
-        arvore.inserir(5);
+        arvore.inserir(new Contato(5, "Contato 5", "(11) 9 9999-9999"));
         assertEquals(0, arvore.calcularProfundidadeArvore());
     }
 
     @Test
     public void testarCalcularProfundidadeArvoreDesbalanceada() {
-        arvore.inserir(10);
-        arvore.inserir(5);
-        arvore.inserir(3);
-        arvore.inserir(1);
+        arvore.inserir(new Contato(10, "Contato 10", "(11) 9 9999-9999"));
+        arvore.inserir(new Contato(5, "Contato 5", "(11) 9 9999-9998"));
+        arvore.inserir(new Contato(3, "Contato 3", "(11) 9 9999-9997"));
+        arvore.inserir(new Contato(1, "Contato 1", "(11) 9 9999-9996"));
         assertEquals(3, arvore.calcularProfundidadeArvore());
     }
 
@@ -258,23 +259,23 @@ public class ArvoreBinariaBuscaTeste {
 
     @Test
     public void testarCalcularProfundidadeNoRaiz() {
-        arvore.inserir(5);
+        arvore.inserir(new Contato(5, "Contato 5", "(11) 9 9999-9999"));
         assertEquals(0, arvore.calcularProfundidadeNo(5));
     }
 
     @Test
     public void testarCalcularProfundidadeNoFolha() {
-        arvore.inserir(5);
-        arvore.inserir(3);
-        arvore.inserir(1);
-        assertEquals(2, arvore.calcularProfundidadeNo(1));
+        arvore.inserir(new Contato(5, "Contato 5", "(11) 9 9999-9999"));
+        arvore.inserir(new Contato(3, "Contato 3", "(11) 9 9999-9998"));
+        arvore.inserir(new Contato(7, "Contato 7", "(11) 9 9999-9997"));
+        assertEquals(1, arvore.calcularProfundidadeNo(3));
     }
 
     @Test
     public void testarCalcularProfundidadeNoIntermediario() {
-        arvore.inserir(10);
-        arvore.inserir(5);
-        arvore.inserir(3);
+        arvore.inserir(new Contato(10, "Contato 10", "(11) 9 9999-9999"));
+        arvore.inserir(new Contato(5, "Contato 5", "(11) 9 9999-9998"));
+        arvore.inserir(new Contato(3, "Contato 3", "(11) 9 9999-9997"));
         assertEquals(1, arvore.calcularProfundidadeNo(5));
     }
 
@@ -285,108 +286,38 @@ public class ArvoreBinariaBuscaTeste {
 
     @Test
     public void testarImprimirPreOrdemUmNo() {
-        arvore.inserir(10);
-        assertEquals("[10]", arvore.imprimirPreOrdem());
-    }
-
-    @Test
-    public void testarImprimirPreOrdem() {
-        arvore.inserir(10);
-        arvore.inserir(5);
-        arvore.inserir(15);
-        arvore.inserir(3);
-        arvore.inserir(7);
-        String esperado = "[10, 5, 3, 7, 15]";
+        arvore.inserir(new Contato(10, "Contato 10", "(11) 9 9999-9999"));
+        String esperado = "[ID: 10, " + 
+                        "Nome: CONTATO 10, " + 
+                        "Telefone: (11) 9 9999-9999]";
         assertEquals(esperado, arvore.imprimirPreOrdem());
     }
-
+    
     @Test
-    public void testarImprimirPosOrdemArvoreVazia() {
-        assertEquals("[]", arvore.imprimirPosOrdem());
-    }
+    public void testarImprimirPreOrdem() {
+        arvore.inserir(new Contato(10, "Contato 10", "(11) 9 9999-9999"));
+        arvore.inserir(new Contato(5, "Contato 5", "(11) 9 9999-9998"));
+        arvore.inserir(new Contato(15, "Contato 15", "(11) 9 9999-9997"));
+        arvore.inserir(new Contato(3, "Contato 3", "(11) 9 9999-9996"));
+        arvore.inserir(new Contato(7, "Contato 7", "(11) 9 9999-9995"));
+        String esperado = "[ID: 10, "+
+                            "Nome: CONTATO 10, "+
+                            "Telefone: (11) 9 9999-9999, "+
+                            "ID: 5, "+
+                            "Nome: CONTATO 5, "+
+                            "Telefone: (11) 9 9999-9998, "+
+                            "ID: 3, "+
+                            "Nome: CONTATO 3, "+
+                            "Telefone: (11) 9 9999-9996, "+
+                            "ID: 7, "+
+                            "Nome: CONTATO 7, "+
+                            "Telefone: (11) 9 9999-9995, "+
+                            "ID: 15, "+
+                            "Nome: CONTATO 15, "+
+                            "Telefone: (11) 9 9999-9997]";
 
-    @Test
-    public void testarImprimirPosOrdemUmNo() {
-        arvore.inserir(10);
-        assertEquals("[10]", arvore.imprimirPosOrdem());
-    }
 
-    @Test
-    public void testarImprimirPosOrdem() {
-        arvore.inserir(10);
-        arvore.inserir(5);
-        arvore.inserir(15);
-        arvore.inserir(3);
-        arvore.inserir(7);
-        String esperado = "[3, 7, 5, 15, 10]";
-        assertEquals(esperado, arvore.imprimirPosOrdem());
-    }
 
-    @Test
-    public void testarImprimirInOrdemArvoreVazia() {
-        assertEquals("[]", arvore.imprimirInOrdem());
-    }
-
-    @Test
-    public void testarImprimirInOrdemUmNo() {
-        arvore.inserir(10);
-        assertEquals("[10]", arvore.imprimirInOrdem());
-    }
-
-    @Test
-    public void testarImprimirInOrdem() {
-        arvore.inserir(10);
-        arvore.inserir(5);
-        arvore.inserir(15);
-        arvore.inserir(3);
-        arvore.inserir(7);
-        String esperado = "[3, 5, 7, 10, 15]";
-        assertEquals(esperado, arvore.imprimirInOrdem());
-    }
-
-    @Test
-    public void testarInsercaoRemocaoComplexa() {
-        arvore.inserir(50);
-        arvore.inserir(30);
-        arvore.inserir(70);
-        arvore.inserir(20);
-        arvore.inserir(40);
-        arvore.inserir(60);
-        arvore.inserir(80);
-        arvore.remover(30);
-        assertEquals(6, arvore.contarNos());
-        assertFalse(arvore.existe(30));
-        assertTrue(arvore.existe(40));
-        assertEquals(2, arvore.calcularAlturaNo(50));
-        assertEquals(1, arvore.calcularProfundidadeNo(70));
-    }
-
-    @Test
-    public void testarArvoreComplexaAposRemocao() {
-        arvore.inserir(10);
-        arvore.inserir(5);
-        arvore.inserir(15);
-        arvore.inserir(3);
-        arvore.inserir(1);
-        arvore.remover(15);
-        assertEquals(4, arvore.contarNos());
-        assertEquals(3, arvore.calcularAlturaArvore());
-        assertEquals(3, arvore.calcularProfundidadeNo(1));
-    }
-
-    @Test
-    public void testarMultiplasRemocoes() {
-        arvore.inserir(10);
-        arvore.inserir(5);
-        arvore.inserir(15);
-        arvore.inserir(3);
-        arvore.inserir(7);
-        arvore.remover(5);
-        arvore.remover(15);
-        assertEquals(3, arvore.contarNos());
-        assertTrue(arvore.existe(10));
-        assertTrue(arvore.existe(3));
-        assertTrue(arvore.existe(7));
-        assertEquals(2, arvore.calcularAlturaArvore());
-    }
+        assertEquals(esperado, arvore.imprimirPreOrdem());
+        }
 }

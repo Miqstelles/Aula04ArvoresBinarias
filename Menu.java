@@ -15,7 +15,7 @@ public class Menu {
     }
 
     private void exibirMenu() {
-        System.out.println("1 - Inserir novo contato");
+        System.out.println("\n1 - Inserir novo contato");
         System.out.println("2 - Remover contato - (ID)");
         System.out.println("3 - Buscar contato - (ID)");
         System.out.println("4 - Listar contatos em ordem (alfabética)");

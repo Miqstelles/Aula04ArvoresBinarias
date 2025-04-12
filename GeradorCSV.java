@@ -38,8 +38,8 @@ public class GeradorCSV {
     }
 
     public static void main(String[] args) {
-        String arquivoCSV = System.getProperty("user.dir") + "/assets/contatos.csv"; // Caminho do arquivo CSV
-        int quantidadeContatos = 50000;  // Total de contatos a serem gerados
+        String arquivoCSV = System.getProperty("user.dir") + "/assets/contatos.csv";
+        int quantidadeContatos = 50000;
 
         gerarArquivoCSV(arquivoCSV, quantidadeContatos);
     }

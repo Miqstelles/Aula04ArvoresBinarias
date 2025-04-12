@@ -340,5 +340,18 @@ public class ArvoreBinariaBusca {
         sb.append("]");
         return sb.toString();
     }
-    
+
+    public int contarNosFolha() {
+        return contarNosFolhaRecursivo(raiz);
+    }
+
+    private int contarNosFolhaRecursivo(No atual) {
+        if (atual == null) {
+            return 0;
+        }
+        if (atual.esquerdo == null && atual.direito == null) {
+            return 1;
+        }
+        return contarNosFolhaRecursivo(atual.esquerdo) + contarNosFolhaRecursivo(atual.direito);
+    }
 }

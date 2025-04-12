@@ -1,15 +1,15 @@
 import java.util.Scanner;
 
 public class Menu {
-    
+
     private int opcao;
     private Scanner scanner;
     private ArvoreBinariaBusca arvore;
     private ArvoreBinariaBusca arvoreOrdenadaPorNome;
-    
-    public Menu( ArvoreBinariaBusca arvore, ArvoreBinariaBusca arvoreOrdenadaPorNome) {
+
+    public Menu(ArvoreBinariaBusca arvore, ArvoreBinariaBusca arvoreOrdenadaPorNome) {
         this.arvore = arvore;
-        this.arvoreOrdenadaPorNome = arvoreOrdenadaPorNome;   
+        this.arvoreOrdenadaPorNome = arvoreOrdenadaPorNome;
         this.opcao = 0;
         this.scanner = new Scanner(System.in);
     }
@@ -37,7 +37,7 @@ public class Menu {
         String nome = scanner.nextLine();
         System.out.print("Digite o telefone do contato: ");
         String telefone = scanner.nextLine();
-        
+
         return new Contato(id, nome, telefone);
     }
 
@@ -79,22 +79,21 @@ public class Menu {
             case 4:
                 System.out.println("\nÁrvore ordenada por Nome:");
                 System.out.println(arvore.imprimirInOrdemPorNome());
-                // Listar contatos em ordem alfabética
                 break;
             case 5:
-                String caminhoArquivo = System.getProperty("user.dir") + "/assets/contatos.csv"; // Caminho do arquivo CSV
-                int quantidadeContatos = 50000;  // Quantidade de contatos a serem gerados
+                String caminhoArquivo = System.getProperty("user.dir") + "/assets/contatos.csv";
+                int quantidadeContatos = 50000;
                 GeradorCSV.gerarArquivoCSV(caminhoArquivo, quantidadeContatos);
                 ImportadorCSV.importarCSV(caminhoArquivo, this.arvore, this.arvoreOrdenadaPorNome);
                 break;
             case 6:
-                System.out.println("foi op6");
-                // Mostrar estatísticas
+                System.out.println("Número total de contatos cadastrados: " + arvore.contarNos());
+                System.out.println("Altura da árvore: " + arvore.calcularAlturaArvore());
+                System.out.println("Número de nós folha: " + arvore.contarNosFolha());
                 break;
             case 7:
                 System.out.println("Saindo do programa...");
                 this.scanner.close();
-                // Sair do programa
                 break;
             default:
                 System.out.println("Opção inválida. Tente novamente.");

@@ -320,4 +320,20 @@ public class ArvoreBinariaBuscaTeste {
 
         assertEquals(esperado, arvore.imprimirPreOrdem());
         }
+
+
+    @Test
+    public void testContarNosFolha() {
+        ArvoreBinariaBusca arvore = new ArvoreBinariaBusca();
+        arvore.inserir(new Contato(50, "Ana", "1111"));
+        arvore.inserir(new Contato(30, "Bruno", "2222"));
+        arvore.inserir(new Contato(70, "Carlos", "3333"));
+        arvore.inserir(new Contato(20, "Daniela", "4444"));
+        arvore.inserir(new Contato(40, "Eduardo", "5555"));
+        arvore.inserir(new Contato(60, "Fernanda", "6666"));
+        arvore.inserir(new Contato(80, "Gabriel", "7777"));
+
+        int folhas = arvore.contarNosFolha();
+        assertEquals(4, folhas);
+    }
 }
